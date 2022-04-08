@@ -16,8 +16,8 @@ public class Gun : MonoBehaviour
     private AudioSource gunAudioPlayer;  //총 소리 재생기
     //public AudioClip shotClip;  //발사 소리
     //public AudioClip reloadClip;  //재장전 소리
-    public int ammoRemain;// = 100;  //남은 전체 탄알
-    public int magCapacity;// = 25;  //탄창 용량
+    public int ammoRemain = 100;  //남은 전체 탄알
+    //public int magCapacity;// = 25;  //탄창 용량
     //public float damage;// = 25;  //공격력
 
     public GunData gunData;//총의 현재 데이터
@@ -25,7 +25,7 @@ public class Gun : MonoBehaviour
     private float fireDistance = 50f;  //사정거리
     public int magAmmo;  //현재 탄창에 남아 있는 탄알
     //public float timeBetFire;// = 0.12f;  //탄알 발사 간격
-    public float reloadTime;// = 1.8f;  //재장전 소요 시간
+    float reloadTime;// = 1.8f;  //재장전 소요 시간
     private float lastFireTime;  //총을 마지막으로 발사한 시점
 
     private void Awake()
@@ -41,6 +41,7 @@ public class Gun : MonoBehaviour
         //전체 옙비 탄알 양을 초기화
         ammoRemain = gunData.startAmmoRemain;
         magAmmo = gunData.magCapacity; //현재 탄창을 가득 채우기
+        reloadTime = gunData.reloadTime;
         state = State.Ready; //총의 현재 상태를 촐을 쏠 준비가 된 상태로 변경
         lastFireTime = 0;  //마지막으로 총을 쏜 시점을 초기화
 
@@ -100,14 +101,35 @@ public class Gun : MonoBehaviour
 
     public bool Reload()
     {
-        return false;     
+        if(state == State.Reloading || ammoRemain <= 0 || magAmmo >= gunData.magCapacity)
+        {
+            //이미 재장전 중이거나 남은 탄알이 없거나
+            //탄창에 탄알이 이미 가득한 경우 재장전할 수 없음
+            return false;
+        }
+        //재장전 처리 시작
+        StartCoroutine(ReloadRoutine());
+        return true;
     }
 
     private IEnumerator ReloadRoutine()  //실제 재장전 처리를 진행
     {
         state = State.Reloading;  //현재 상태를 재장전 중 상태로 전환
 
+        gunAudioPlayer.PlayOneShot(gunData.reloadClip);//재정전 소리 재생
+
         yield return new WaitForSeconds(gunData.reloadTime); //재장전 소요 시간만큼 처리 쉬기
+
+        int ammoToFill = gunData.magCapacity - magAmmo;//탄창에 채울 탄알을 계산
+
+        if(ammoRemain < ammoToFill)  //탄창에 채워야 할 탄알이 남은 탄알보다 많다면 채워야 할 탄알 수를 남은 탄알 수에 맞춰 줄임
+        {
+            ammoToFill = ammoRemain;
+        }
+
+        magAmmo += ammoToFill;//탄창을 채움
+
+        ammoRemain -= ammoToFill;//남은 탄알에서 탄창에 채운만큼 탄알을 뺌
 
         state = State.Ready; //총의 현재 상태를 발사 준비된 상태로 변경
     }
