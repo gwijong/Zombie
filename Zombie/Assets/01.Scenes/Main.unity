@@ -529,10 +529,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61ef0959a59bfd54990d4dda6be94c4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gun: {fileID: 0}
-  gunPivot: {fileID: 0}
-  leftHandMount: {fileID: 0}
-  rightHandMount: {fileID: 0}
+  gun: {fileID: 683777449}
+  gunPivot: {fileID: 930873184}
+  leftHandMount: {fileID: 1609988381}
+  rightHandMount: {fileID: 1003304504}
 --- !u!4 &543008471 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 98cdee121d6e440de9fb99a7c24fa0da, type: 3}
@@ -1038,6 +1038,11 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!4 &1003304504 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4789895822770736, guid: 13259943c4d634186ac994d570bb3253, type: 3}
+  m_PrefabInstance: {fileID: 683777444}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1286515791
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1103,6 +1108,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 49b04053ea2dc49ae8eae12418134ef1, type: 3}
+--- !u!4 &1609988381 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4355249862128598, guid: 13259943c4d634186ac994d570bb3253, type: 3}
+  m_PrefabInstance: {fileID: 683777444}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1668994983
 PrefabInstance:
   m_ObjectHideFlags: 0
