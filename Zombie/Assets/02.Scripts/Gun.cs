@@ -133,5 +133,5 @@ public class Gun : MonoBehaviour
 
         state = State.Ready; //총의 현재 상태를 발사 준비된 상태로 변경
     }
-    
+
 }
