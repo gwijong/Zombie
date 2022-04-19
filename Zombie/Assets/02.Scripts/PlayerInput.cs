@@ -37,4 +37,6 @@ public class PlayerInput : MonoBehaviour
         //reload에 관한 입력 장치
         reload = Input.GetButtonDown(reloadButtonName);
     }
+
+
 }
