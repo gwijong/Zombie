@@ -44,7 +44,7 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary> 적 웨이브 텍스트 갱신 </summary>
-    public void UpdataWaveText(int waves, int count)
+    public void UpdateWaveText(int waves, int count)
     {
         waveText.text = "Wave : " + waves + "\nEnemy Left : " + count; //  \n : 개행 문자
     }
