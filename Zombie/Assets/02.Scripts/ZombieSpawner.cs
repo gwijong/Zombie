@@ -25,6 +25,7 @@ public class ZombieSpawner : MonoBehaviour
     private List<Zombie> zombies = new List<Zombie>();  //생성된 적을 담는 리스트
     private int wave;  //현재 웨이브
 
+    //매 프레임마다 조건을 검사하고 좀비 생성 웨이브를 실행
     private void Update()
     {
         //게임오버 상태일때는 생성하지 않음
@@ -52,12 +53,20 @@ public class ZombieSpawner : MonoBehaviour
 
     //현재 웨이브에 맞춰 적 생성
     private void SpawnWave() 
-    { 
-    
+    {
+        wave++;//웨이브 1 증가
+
+        int spawnCount = Mathf.RoundToInt(wave * 1.5f);//현재 웨이브 * 1.5를 반올림한 수만큼 적 생성
+
+        for(int i = 0; i<spawnCount; i++)//spawnCount만큼 적 생성
+        {
+            float enemyIntensity = Random.Range(0f, 1f); //적의 세기를 0%에서 100% 사이에서 랜덤 결정
+            CreateEnemy(enemyIntensity);//적 생성 처리 실행
+        }
     }
 
     //적을 생성하고 추적할 대상을 할당
-    private void CreateEnemy()
+    private void CreateEnemy(float intensity)
     {
 
     }
