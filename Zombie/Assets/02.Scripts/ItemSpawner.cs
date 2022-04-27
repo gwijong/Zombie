@@ -42,7 +42,7 @@ public class ItemSpawner : MonoBehaviour
     private void Spawn()
     {
         //플레이어 근처에서 내비메시 위의 랜덤 위치 가져오기
-        Vector3 spawnPosition = GetRandomPointOnNavMesh(playerTransform.position, maxDistance);
+        Vector3 spawnPosition = GetRandomPointOnNavMesh(playerTransform.position, maxDistance);//매개변수 2개
         //바닥에서 0.5만큼 위로 올리기
         spawnPosition += Vector3.up * 0.5f;
 
@@ -60,12 +60,12 @@ public class ItemSpawner : MonoBehaviour
     {
         // center를 중심으로 반지름이 maxDistance인 구 안에서의 랜덤한 위치 하나를 저장
         // Random.insideUnitSphere는 반지름이 1인 구 안에서의 랜덤한 한 점을 반환하는 프로퍼티
-        Vector3 randomPos = Random.insideUnitSphere * distance + center;
+        Vector3 randomPos = (Random.insideUnitSphere * distance) + center;
 
         //내비메시 샘플링의 결과 정보를 저장하는 변수
         NavMeshHit hit;
         //maxDistance 반경 안에서 randomPos에 가장 가까운 내비메시 위의 한 점을 찾음
-        NavMesh.SamplePosition(randomPos, out hit, distance, NavMesh.AllAreas);
+        NavMesh.SamplePosition(randomPos, out hit, distance, NavMesh.AllAreas);//out = 출력전용 매개변수
         //찾은 점 반환
         return hit.position;
     }
